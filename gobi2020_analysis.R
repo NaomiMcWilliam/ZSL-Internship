@@ -147,5 +147,3 @@ for(j in animals){
 }
 
 
-
-
