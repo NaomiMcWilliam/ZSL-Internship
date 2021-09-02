@@ -89,7 +89,8 @@ pal <- colorFactor(
 )
 
 #make map
-leaflet() %>% addTiles() %>%
+map <- leaflet() %>%
+        #basemap
         addProviderTiles(providers$Esri.DeLorme) %>%
         
         #EMPTY CAMERAS
@@ -181,12 +182,14 @@ leaflet() %>% addTiles() %>%
                    color = ~pal(Species), radius = (~sqrt(Freq) * 1500),group=~Species,
                    label = ~Station, labelOptions = labelOptions(noHide=T,direction='right', textOnly = T)
                    
-        )%>%
+        )
         
         
         
-        #LEGEND, colour coding
-        addLegend(data = all_df[all_df$Species %in% species & all_df$Freq>0,],
+
+#LEGEND, colour coding
+
+map %>% addLegend( data = all_df[all_df$Species %in% species & all_df$Freq>0,],
                 "topright", pal=pal, values = ~species
         ) %>%
         
@@ -204,7 +207,6 @@ leaflet() %>% addTiles() %>%
                                             imperial = TRUE,
                                             updateWhenIdle = TRUE)
         )
-
 
 
 
